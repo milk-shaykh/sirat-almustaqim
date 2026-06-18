@@ -1,11 +1,7 @@
-from flask import flask
+from flask import Flask, render_template
 
-app = flask(__name__)
+app = Flask(__name__)
 
 @app.route('/')
 def wassup():
-  return "<p>NEA</p>"
-
-@app.route('/test')
-def wassup():
-  return "<p>test</p>"
+  return render_template("index.html")
