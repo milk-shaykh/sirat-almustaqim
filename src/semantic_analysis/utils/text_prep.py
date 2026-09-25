@@ -7,7 +7,7 @@ nltk.download('punkt_tab')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('stopwords')
 
-eng_stopwords = set(stopwords.words('english'))
+stopwords_eng = set(stopwords.words('english'))
 lemmatiser = WordNetLemmatizer
 
 def pos_tokenise(text: str) -> list[tuple[str, str]]:
@@ -16,7 +16,7 @@ def pos_tokenise(text: str) -> list[tuple[str, str]]:
 def remove_stopwords(tokens: list[tuple[str, str]]) -> list[list[str, str]]:
 	filtered_tokens = []
 	for token in tokens:
-		if not token[0] in eng_stopwords:
+		if not token[0] in stopwords_eng:
 			filtered_tokens.append(token)
 	return filtered_tokens
 
@@ -38,6 +38,11 @@ def lemmatise(token: tuple[str, str]) -> tuple[str, str]:
 
 def pos_to_wn(tokens: list[tuple[str, str]]) -> list[tuple[str, str]]:
 	return [(token[0], get_wn_tag(token[1])) for token in tokens]
+
+def remove_stopword(token: tuple[str, str]) -> tuple[str, str]:
+	if token[0] in stopwords_eng:
+		return (None, None)
+	return token
 
 if __name__ == "__main__":
 	print(word_tokenize("hello how are you"))
