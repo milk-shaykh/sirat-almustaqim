@@ -36,6 +36,18 @@ def word_vectorise(text: list[tuple[str, str]]):
 		time.sleep(0.5)
 	raise Exception("ERROR. HF_API REFUSED TO SEND VECTOR.")
 
+
+
+
+
+
+
+
+
+
+
+
+
 # ✨ Abu Hurairah (May Allah be pleased with him) reported: The Messenger of Allah (ﷺ) put me in charge of charity of Ramadan 
 # (Sadaqat-ul- Fitr). Somebody came to me and began to take away some food-stuff. I caught him and said, "I must take you to 
 # the Messenger of Allah (ﷺ)." He said, "I am a needy man with a large family, and so I have a pressing need." I let him go. 

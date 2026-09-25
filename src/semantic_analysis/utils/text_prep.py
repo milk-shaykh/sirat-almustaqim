@@ -49,6 +49,13 @@ if __name__ == "__main__":
 	print(sent_tokenize("hello how are you"))
 
 
+
+
+
+
+	
+
+
 # ✨ 'Abdur-Rahman bin Abu Bakr (May Allah be pleased with them) reported: The Companions of As-Suffah were poor people. 
 # The Prophet (ﷺ) said, "Whoever has food enough for two people, should take a third one (from among them), and whoever has 
 # food enough for four persons, should take a fifth or sixth (or said something similar)." Abu Bakr (May Allah be pleased 
