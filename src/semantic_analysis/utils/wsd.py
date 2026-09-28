@@ -39,6 +39,22 @@ def big_boss_wsd(text: str) -> list[list[tuple[str, str, list[float]]]]:
 	# give back list of lists of tuples each inner list is a sentance outer list is of sentances
 
 	sentance_tokens = text_prep.sent_tokenize(text)
+	sentance_vectors = []
 	tokens = [text_prep.pos_tag(sentance) for sentance in sentance_tokens]
-	for sentance in sentance_tokens:
-		vectors = vtk.word_vectorise(sentance)
+	for i in range(len(sentance_tokens)):
+		vectors = vtk.word_vectorise(tokens[i])
+		word_vectors = []
+		for j in range(len(vectors)):
+			key = tokens[i][j]
+			if key in text_prep.stopwords_eng:
+				continue
+			context_vectors = csql.find_vectors(key)
+			proxs = []
+			for k in range(len(context_vectors)):
+				proxs.append(vtk.coprox(vectors[j], context_vectors[k]))
+			proxs.sort()
+			word_vectors.append(proxs[0])
+		sentance_tokens.append(word_vectors)
+	return sentance_vectors
+
+
