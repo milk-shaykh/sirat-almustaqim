@@ -45,3 +45,5 @@ def vectorise_semcor(app):
 
 if __name__ == "__main__":
 	vectorise_semcor()
+
+

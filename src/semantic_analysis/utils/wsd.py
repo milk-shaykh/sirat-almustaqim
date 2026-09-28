@@ -1,13 +1,13 @@
 import text_prep, vtk
 from ..data import context_sql as csql
 
-def contextualise_semcor(word: tuple[str, str], sense_vector: list[int]) -> list[int]:
+def contextualise_semcor(word: tuple[str, str], sense_vector: list[int]) -> list[int]: # currently half pseudo half still real so yh
 	tag = word[1]
 	if tag not in ("a", "v", "n", "s", "r"):
 		tag = text_prep.get_wn_tag(word[1])
 	lemma = text_prep.lemmatise((word[0], tag))
 	key = f"{lemma[0]}.{lemma[1]}"
-	vectors = csql.find_vectors_semcor(key)
+	vectors = csql.find_vectors_semcor(key) # make it so that returns a vector or none then validate
 	if vectors:
 		proxs = []
 		for vector in vectors:
