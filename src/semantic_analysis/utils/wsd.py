@@ -1,5 +1,5 @@
-import text_prep, vtk
-from ..data import context_sql as csql
+from src.semantic_analysis.utils import vtk, text_prep
+from src.semantic_analysis.data import context_sql as csql
 
 def contextualise_semcor(word: tuple[str, str], sense_vector: list[int]) -> list[int]: # currently half pseudo half still real so yh
 	tag = word[1]
@@ -43,18 +43,25 @@ def big_boss_wsd(text: str) -> list[list[tuple[str, str, list[float]]]]:
 	tokens = [text_prep.pos_tag(sentance) for sentance in sentance_tokens]
 	for i in range(len(sentance_tokens)):
 		vectors = vtk.word_vectorise(tokens[i])
+		sense_vector = vtk.sum_vectors(vectors)
 		word_vectors = []
 		for j in range(len(vectors)):
-			key = tokens[i][j]
+			key = tokens[i][j][0]
+			tag = tokens[i][j][1]
 			if key in text_prep.stopwords_eng:
 				continue
 			context_vectors = csql.find_vectors(key)
 			proxs = []
 			for k in range(len(context_vectors)):
-				proxs.append(vtk.coprox(vectors[j], context_vectors[k]))
-			proxs.sort()
-			word_vectors.append(proxs[0])
-		sentance_tokens.append(word_vectors)
+				proxs.append(vtk.coprox(sense_vector, context_vectors[k]))
+			if proxs:
+				proxs.sort()
+				vectors[j] = proxs[-1]
+			else:
+				proxs = [None]
+			word_vectors.append((key, tag, proxs[-1]))
+			sense_vector = vtk.sum_vectors(vectors)
+		sentance_vectors.append(word_vectors)
 	return sentance_vectors
 
 
