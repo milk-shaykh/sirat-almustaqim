@@ -35,17 +35,3 @@ def word_vectorise(text: list[tuple[str, str]]):
 				time.sleep(0.1)
 		time.sleep(0.5)
 	raise Exception("ERROR. HF_API REFUSED TO SEND VECTOR.")
-
-
-
-
-
-
-
-
-
-
-
-
-
-# 67 ?!

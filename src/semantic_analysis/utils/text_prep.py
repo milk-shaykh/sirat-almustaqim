@@ -10,8 +10,11 @@ nltk.download('stopwords')
 stopwords_eng = set(stopwords.words('english'))
 lemmatiser = WordNetLemmatizer
 
-def pos_tokenise(text: str) -> list[tuple[str, str]]:
+def pos_tokenise_sentance(text: str) -> list[tuple[str, str]]:
 	return pos_tag(word_tokenize(text))
+
+def pos_tokenise(text: str) -> list[list[tuple[str, str]]]:
+	sentance_tokens = sent_tokenize(text)
 
 def remove_stopwords(tokens: list[tuple[str, str]]) -> list[list[str, str]]:
 	filtered_tokens = []

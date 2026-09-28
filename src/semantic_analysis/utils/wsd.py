@@ -16,10 +16,10 @@ def contextualise_semcor(word: tuple[str, str], sense_vector: list[int]) -> list
 		return proxs[0]
 
 
-def wsd(text: str) -> list[list[list[int]]]:
+def wsd(text: str) -> list[list[list[float]]]:
 	text_vectors = []
-	sentances = text_prep.sent_tokenise(text)
-	tokenised_sentances = [text_prep.word_tokenise(sentance) for sentance in sentances]
+	sentances = text_prep.sent_tokenize(text)
+	tokenised_sentances = [text_prep.word_tokenize(sentance) for sentance in sentances]
 	for sentance in tokenised_sentances:
 		joined_sentance = " ".join(sentance)
 		tagged_words = text_prep.pos_tokenise(joined_sentance)
@@ -30,3 +30,15 @@ def wsd(text: str) -> list[list[list[int]]]:
 			vectors[i] = context_vector
 		text_vectors.append(vectors)
 	return text_vectors
+
+def big_boss_wsd(text: str) -> list[list[tuple[str, str, list[float]]]]:
+	# text prep into tokens of each word and their pos tag
+	# for each sentance vectorise the whole sentance
+	# for each word use iterative improvement discarding stopwords and punctuation
+	# send each vectorised sentance into a list of triple tuples with 1 st element as word, 2 nd as pos tag and 3 rd as vector
+	# give back list of lists of tuples each inner list is a sentance outer list is of sentances
+
+	sentance_tokens = text_prep.sent_tokenize(text)
+	tokens = [text_prep.pos_tag(sentance) for sentance in sentance_tokens]
+	for sentance in sentance_tokens:
+		vectors = vtk.word_vectorise(sentance)
