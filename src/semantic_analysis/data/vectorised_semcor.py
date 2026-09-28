@@ -4,7 +4,7 @@ import sqlite3
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import IntegrityError
-from ..utils.text_prep import remove_stopword
+from src.semantic_analysis.utils.text_prep import remove_stopword
 from string import punctuation
 
 

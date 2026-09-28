@@ -1,4 +1,4 @@
-from ..clients import hf_api
+from src.semantic_analysis.clients import hf_api
 import time
 
 def coprox(vector1: list[float], vector2: list[float]) -> float:
