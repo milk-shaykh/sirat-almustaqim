@@ -18,4 +18,4 @@ class Word_Semcor(db.Model):
 	synset = db.Column(db.String(40), primary_key=True)
 	vector_id = db.Column(db.Integer(100), foreign_key=True)
 
-# most of this is saved for later and is half pseudo have real PR code PRC (not the country)
+# most of this is saved for later and is half pseudo
