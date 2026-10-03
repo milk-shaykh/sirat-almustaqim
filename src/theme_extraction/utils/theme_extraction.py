@@ -1,4 +1,5 @@
-from ....src.semantic_analysis.utils import text_prep, wsd, vtk
+from src.semantic_analysis.utils import text_prep, wsd, vtk
+from src.theme_extraction.data.sort_tuples import sort_tuples
 
 def cluster_vectors(tokens: list[tuple[str, str, list[float]]], COPROX_MIN: float) -> tuple[ list[tuple[str, str, list[float]]], list[list[int]] ]:
 	"""
@@ -31,7 +32,18 @@ def cluster_vectors(tokens: list[tuple[str, str, list[float]]], COPROX_MIN: floa
 			flag = True
 	return clusters, centroids
 
-def extract_themes(text: str) -> list[str]:
+
+
+def find_closest_match(centroid: list[float], cluster: list[tuple[str, str, list[float]]]):
+	proxes = []
+	for i in range(len(cluster)):
+		proxes.append((vtk.coprox(cluster[i], centroid), i))
+	sort_tuples(proxes)
+	return cluster[proxes[0][1]][0]
+
+
+
+def extract_themes(text: str, themes: list[tuple[str, list[float]]], COPROX_MIN: float) -> list[str]:
 	"""
 	get the text tokenise into sentances
 	vectorise each sentance turn into (word, tag, vector):
@@ -41,13 +53,41 @@ def extract_themes(text: str) -> list[str]:
 	get the centroids for each + against known themes and their vectors, give highest n themes above COPROX_MIN
 	return the top themes
 	"""
+
+	extracted_themes = []
+
+	if COPROX_MIN is None:
+		COPROX_MIN = 0.5
+
 	sentances = text_prep.sent_tokenize(text)
 	words = [text_prep.pos_tokenise_sentance(sentance) for sentance in sentances]
 	vectors = wsd.wsd(text)
 
-	for s in range(len(sentances)):
-		for w in range(words):
+	# make vectors into tuple form:
+	tuples = []
+	for s in range(len(words)):
+		sentance_tuples = []
+		for w in range(len(words[w])):
+			sentance_tuples.append((*w, vectors[s][w]))
+		tuples.append(sentance_tuples)
 
+	clusters, centroids = cluster_vectors(tuples)
+		# get each theme and compare against each centroid
+		# if above COPROX_MIN:
+		# 	return the themes put into list of the themes
+		# else:
+		# 	do nothing
+		# repeat for each centroid
+		# return found themes 
 
-	clusters, centroids = cluster_vectors()
-	
+	for c in range(len(centroids)):
+		extend_themes = []
+		for t in range(len(themes)):
+			if vtk.coprox(themes[t], centroids[c]) > COPROX_MIN:
+				extend_themes.append(themes[t][0])
+			if not extend_themes:
+				extend_themes.append(find_closest_match(centroids[c], clusters[c]))
+		if extend_themes:
+			extracted_themes.extend(extend_themes)
+
+	return extracted_themes
