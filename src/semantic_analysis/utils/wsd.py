@@ -14,54 +14,41 @@ def contextualise_semcor(word: tuple[str, str], sense_vector: list[int]) -> list
 			proxs.append(vtk.coprox(vector, sense_vector))
 		proxs.sort()
 		return proxs[0]
-
-
-def wsd(text: str) -> list[list[list[float]]]:
-	text_vectors = []
-	sentances = text_prep.sent_tokenize(text)
-	tokenised_sentances = [text_prep.word_tokenize(sentance) for sentance in sentances]
-	for sentance in tokenised_sentances:
-		joined_sentance = " ".join(sentance)
-		tagged_words = text_prep.pos_tokenise(joined_sentance)
-		vectors = vtk.word_vectorise(joined_sentance)
-		for i in range(len(vectors)):
-			# sentance_vector = vtk.sum_vectors(vectors)
-			context_vector = contextualise_semcor(tagged_words[i], vectors[i])
-			vectors[i] = context_vector
-		text_vectors.append(vectors)
-	return text_vectors
-
-def big_boss_wsd(text: str) -> list[list[tuple[str, str, list[float]]]]:
+	
+def an_idea() -> None:
 	# text prep into tokens of each word and their pos tag
 	# for each sentance vectorise the whole sentance
 	# for each word use iterative improvement discarding stopwords and punctuation
 	# send each vectorised sentance into a list of triple tuples with 1 st element as word, 2 nd as pos tag and 3 rd as vector
 	# give back list of lists of tuples each inner list is a sentance outer list is of sentances
+	return """shushhhh"""
 
+def wsd(text: str) -> list[list[list[int]]]:
 	sentance_tokens = text_prep.sent_tokenize(text)
-	sentance_vectors = []
-	tokens = [text_prep.pos_tag(sentance) for sentance in sentance_tokens]
-	for i in range(len(sentance_tokens)):
-		vectors = vtk.word_vectorise(tokens[i])
-		sense_vector = vtk.sum_vectors(vectors)
-		word_vectors = []
-		for j in range(len(vectors)):
-			key = tokens[i][j][0]
-			tag = tokens[i][j][1]
-			if key in text_prep.stopwords_eng:
-				continue
-			context_vectors = csql.find_vectors(key)
-			proxs = []
-			for k in range(len(context_vectors)):
-				proxs.append(vtk.coprox(sense_vector, context_vectors[k]))
-			if proxs:
-				proxs.sort()
-				vectors[j] = proxs[-1]
+	text_tokens = [text_prep.pos_tag(sentance) for sentance in sentance_tokens]
+	context_tokens = []
+	for sentance in text_tokens:
+		context_sentance = []
+		vectors = vtk.word_vectorise_tokens(sentance)
+		indexes = []
+		for i in range(len(vectors)):
+			if not text_prep.is_stopword(sentance[i]):
+				indexes.append(i)
+		for i in range(len(vectors)):
+			if i in indexes:
+				sense_vector = vtk.sum_vectors(vectors)
+				context_vectors = csql.load_vectors_from_token(sentance[index])
+				if context_vectors:
+					biggest = -2
+					index = -1
+					for i in range(len(context_vectors)):
+						prox = vtk.coprox(context_vectors[i], sense_vector)
+						if prox > biggest:
+							biggest = prox
+							index = i
+					vectors[index] = prox
+					context_sentance.append((sentance[index][0], sentance[index][1], vectors[index]))
 			else:
-				proxs = [None]
-			word_vectors.append((key, tag, proxs[-1]))
-			sense_vector = vtk.sum_vectors(vectors)
-		sentance_vectors.append(word_vectors)
-	return sentance_vectors
-
-
+				context_sentance.append(sentance[index])
+		context_tokens.append(context_sentance)
+	return context_tokens
