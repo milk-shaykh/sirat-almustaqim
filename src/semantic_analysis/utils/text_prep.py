@@ -15,6 +15,7 @@ def pos_tokenise_sentance(text: str) -> list[tuple[str, str]]:
 
 def pos_tokenise(text: str) -> list[list[tuple[str, str]]]:
 	sentance_tokens = sent_tokenize(text)
+	return pos_tag(sentance_tokens)
 
 def remove_stopwords(tokens: list[tuple[str, str]]) -> list[list[str, str]]:
 	filtered_tokens = []
@@ -47,16 +48,16 @@ def remove_stopword(token: tuple[str, str]) -> tuple[str, str]:
 		return (None, None)
 	return token
 
+def is_stopword(word: str) -> bool:
+	if word in stopwords_eng:
+		return True
+	return False
+
 if __name__ == "__main__":
 	print(word_tokenize("hello how are you"))
 	print(sent_tokenize("hello how are you"))
 
 
-
-
-
-
-	
 
 
 # ✨ 'Abdur-Rahman bin Abu Bakr (May Allah be pleased with them) reported: The Companions of As-Suffah were poor people. 
