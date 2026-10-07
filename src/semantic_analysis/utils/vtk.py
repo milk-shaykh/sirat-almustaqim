@@ -21,10 +21,10 @@ def sum_vectors(vectors: list[list[float]]) -> list[float]:
 		summated_vector.append(element)
 	return summated_vector
 
-#/usr/local/python/3.14.2/bin/python
-#Python 3.14.2 (main, Aug 27 2026, 12:34:32) [GCC 13.3.0] on linux
-#Type "help", "copyright", "credits" or "license" for more information.
-#Ctrl click to launch VS Code Native REPL
+# /usr/local/python/3.14.2/bin/python
+# Python 3.14.2 (main, Aug 27 2026, 12:34:32) [GCC 13.3.0] on linux
+# Type "help", "copyright", "credits" or "license" for more information.
+# Ctrl click to launch VS Code Native REPL
 
 def word_vectorise(text: list[tuple[str, str]]):
 	for _ in range(5):
