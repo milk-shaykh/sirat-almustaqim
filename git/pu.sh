@@ -10,6 +10,7 @@ repo_root="$(git rev-parse --show-toplevel 2>/dev/null)" || fail "Run this scrip
 cd "$repo_root"
 
 branch="$(git symbolic-ref --quiet --short HEAD)" || fail "Checkout a branch before pushing."
+commit_message="${*:-Update project files}"
 git remote get-url origin >/dev/null 2>&1 || fail "No Git remote named origin is configured."
 git lfs version >/dev/null 2>&1 || fail "Git LFS is required. Install it and try again."
 
@@ -21,7 +22,7 @@ git lfs install
 git add --all -- . ':(exclude).env'
 
 if ! git diff --cached --quiet; then
-    git commit -m "${1:-Update project files}"
+    git commit -m "$commit_message"
 fi
 
 # Convert this repository's 113 MB database in unpublished commits to LFS.
