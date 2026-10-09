@@ -14,14 +14,6 @@ def contextualise_semcor(word: tuple[str, str], sense_vector: list[int]) -> list
 			proxs.append(vtk.coprox(vector, sense_vector))
 		proxs.sort()
 		return proxs[0]
-	
-def an_idea() -> None:
-	# text prep into tokens of each word and their pos tag
-	# for each sentance vectorise the whole sentance
-	# for each word use iterative improvement discarding stopwords and punctuation
-	# send each vectorised sentance into a list of triple tuples with 1 st element as word, 2 nd as pos tag and 3 rd as vector
-	# give back list of lists of tuples each inner list is a sentance outer list is of sentances
-	return """shushhhh"""
 
 def wsd(text: str) -> list[list[list[int]]]:
 	sentance_tokens = text_prep.sent_tokenize(text)
