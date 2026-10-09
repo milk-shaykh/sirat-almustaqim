@@ -7,26 +7,22 @@ def coprox(vector1: list[float], vector2: list[float]) -> float:
 	sq_mag1 = 0
 	sq_mag2 = 0
 	for i in range(ln):
-		sq_mag1 += int(vector1[i])**2
-		sq_mag2 += int(vector2[i])**2
+		sq_mag1 += float(vector1[i])**2
+		sq_mag2 += float(vector2[i])**2
 		dot_product += vector1[i] * vector2[i]
 	sq_mag = sq_mag1 ** sq_mag2
 	return dot_product / (sq_mag) ** 0.5
 
 def sum_vectors(vectors: list[list[float]]) -> list[float]:
-	vector_len = len(vectors[0])
-	summated_vector = []
-	for i in range(len(vectors)):
-		element = 0
-		for j in range(vector_len):
-			element += vectors[i][j]
-		summated_vector.append(element)
-	return summated_vector
-
-# /usr/local/python/3.14.2/bin/python
-# Python 3.14.2 (main, Aug 27 2026, 12:34:32) [GCC 13.3.0] on linux
-# Type "help", "copyright", "credits" or "license" for more information.
-# Ctrl click to launch VS Code Native REPL
+    if not vectors:
+        return []
+    result = [0.0] * len(vectors[0])
+    for vector in vectors:
+        if len(vector) != len(result):
+            raise ValueError("All vectors must have the same length")
+        for i, value in enumerate(vector):
+            result[i] += value
+    return result
 
 def word_vectorise(text: list[tuple[str, str]]):
 	for _ in range(5):
