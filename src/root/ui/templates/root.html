@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#fbfaf7">
+    <title>الصراط المستقيم | القرآن والمكتبة الإسلامية</title>
+    <link rel="stylesheet" href="{{ url_for('root.static', filename='root.css') }}">
+    <script src="{{ url_for('root.static', filename='root.js') }}" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <a class="brand" href="#top" aria-label="الصراط المستقيم - الصفحة الرئيسية">
+            <span class="brand-mark" aria-hidden="true">ص</span>
+            <span class="brand-name">الصراط المستقيم</span>
+        </a>
+        <nav class="primary-nav" aria-label="التنقل الرئيسي">
+            <a class="nav-link is-active" href="#quran">القرآن الكريم</a>
+            <a class="nav-link" href="#library">المكتبة</a>
+            <a class="nav-link" href="#discover">استكشف</a>
+        </nav>
+        <a class="account-link" href="#quran">ابدأ القراءة</a>
+    </header>
+
+    <main id="top">
+        <section class="welcome" aria-labelledby="welcome-title">
+            <div class="welcome-copy">
+                <p class="eyebrow">اقرأ، وابحث، وتدبّر</p>
+                <h1 id="welcome-title">رفيقك إلى <span>المعرفة الإسلامية</span></h1>
+                <p class="welcome-subtitle">القرآن الكريم ومكتبة من أمهات الكتب، في مكان واحد.</p>
+            </div>
+            <form class="search-form" id="site-search" role="search">
+                <label class="visually-hidden" for="search-input">ابحث في القرآن والمكتبة</label>
+                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="10.8" cy="10.8" r="6.8"></circle>
+                    <path d="m16 16 4.5 4.5"></path>
+                </svg>
+                <input id="search-input" type="search" autocomplete="off"
+                       placeholder="ابحث في القرآن الكريم والكتب..." aria-controls="search-results">
+                <button type="submit">بحث</button>
+                <div class="search-results" id="search-results" role="status" aria-live="polite" hidden></div>
+            </form>
+            <div class="search-hints" aria-label="أمثلة للبحث">
+                <span>جرّب:</span>
+                <button type="button" class="search-suggestion" data-query="الفاتحة">سورة الفاتحة</button>
+                <button type="button" class="search-suggestion" data-query="الصبر">الصبر</button>
+                <button type="button" class="search-suggestion" data-query="تفسير">التفسير</button>
+            </div>
+        </section>
+
+        <div class="page-layout">
+            <div class="main-column">
+                <section class="reading-card" id="quran" aria-labelledby="reading-title">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">القرآن الكريم</p>
+                            <h2 id="reading-title">تابع القراءة</h2>
+                        </div>
+                        <a class="text-link" href="#surah-list">كل السور <span aria-hidden="true">←</span></a>
+                    </div>
+                    <a class="resume-row" href="#surah-list">
+                        <span class="surah-emblem" aria-hidden="true">۞</span>
+                        <span class="resume-info">
+                            <strong>سورة الفاتحة</strong>
+                            <span>مكية · ٧ آيات</span>
+                        </span>
+                        <span class="resume-progress">ابدأ القراءة <span aria-hidden="true">←</span></span>
+                    </a>
+                    <div class="verse-panel">
+                        <div class="verse-meta">
+                            <span>سورة طه <span dir="ltr">20:25–26</span></span>
+                            <div class="reader-controls" aria-label="أدوات القراءة">
+                                <button type="button" id="decrease-text" aria-label="تصغير حجم النص">−</button>
+                                <button type="button" id="increase-text" aria-label="تكبير حجم النص">+</button>
+                            </div>
+                        </div>
+                        <p class="verse-text" id="verse-text">رَبِّ اشْرَحْ لِي صَدْرِي ۝ وَيَسِّرْ لِي أَمْرِي</p>
+                        <div class="verse-footer">
+                            <span>دعاء موسى عليه السلام</span>
+                            <button class="save-verse" id="save-verse" type="button" aria-pressed="false">
+                                <span aria-hidden="true">♡</span> <span class="save-label">حفظ الآية</span>
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="library-section" id="library" aria-labelledby="library-title">
+                    <div class="section-heading">
+                        <div>
+                            <p class="eyebrow">تصفّح المصادر</p>
+                            <h2 id="library-title">من المكتبة الإسلامية</h2>
+                        </div>
+                        <a class="text-link" href="#discover">اكتشف المكتبة <span aria-hidden="true">←</span></a>
+                    </div>
+                    <div class="book-grid" id="book-list">
+                        <a class="book-card" href="#discover" data-searchable="تفسير القرآن العظيم ابن كثير تفسير">
+                            <span class="book-cover cover-green" aria-hidden="true"><span>۞</span></span>
+                            <span class="book-details">
+                                <strong>تفسير القرآن العظيم</strong>
+                                <span>ابن كثير</span>
+                                <small>تفسير · ٨ مجلدات</small>
+                            </span>
+                            <span class="card-arrow" aria-hidden="true">←</span>
+                        </a>
+                        <a class="book-card" href="#discover" data-searchable="رياض الصالحين النووي حديث">
+                            <span class="book-cover cover-blue" aria-hidden="true"><span>۞</span></span>
+                            <span class="book-details">
+                                <strong>رياض الصالحين</strong>
+                                <span>يحيى بن شرف النووي</span>
+                                <small>حديث وأذكار</small>
+                            </span>
+                            <span class="card-arrow" aria-hidden="true">←</span>
+                        </a>
+                        <a class="book-card" href="#discover" data-searchable="زاد المعاد ابن القيم سيرة فقه">
+                            <span class="book-cover cover-terracotta" aria-hidden="true"><span>۞</span></span>
+                            <span class="book-details">
+                                <strong>زاد المعاد</strong>
+                                <span>ابن قيم الجوزية</span>
+                                <small>سيرة وفقه</small>
+                            </span>
+                            <span class="card-arrow" aria-hidden="true">←</span>
+                        </a>
+                    </div>
+                    <p class="empty-books" id="empty-books" hidden>لا توجد عناوين مطابقة في هذه القائمة.</p>
+                </section>
+            </div>
+
+            <aside class="side-column">
+                <section class="side-card surah-card" id="surah-list" aria-labelledby="surah-title">
+                    <div class="section-heading compact-heading">
+                        <div>
+                            <p class="eyebrow">١١٤ سورة</p>
+                            <h2 id="surah-title">سور القرآن</h2>
+                        </div>
+                        <span class="list-icon" aria-hidden="true">☷</span>
+                    </div>
+                    <label class="visually-hidden" for="surah-filter">ابحث عن سورة</label>
+                    <input class="surah-filter" id="surah-filter" type="search" placeholder="ابحث عن سورة...">
+                    <ul class="surah-list" id="surah-items">
+                        <li><a href="#quran" data-searchable="الفاتحة الفاتحه">الفاتحة <span>١</span></a></li>
+                        <li><a href="#quran" data-searchable="البقرة">البقرة <span>٢</span></a></li>
+                        <li><a href="#quran" data-searchable="آل عمران ال عمران">آل عمران <span>٣</span></a></li>
+                        <li><a href="#quran" data-searchable="النساء">النساء <span>٤</span></a></li>
+                        <li><a href="#quran" data-searchable="المائدة">المائدة <span>٥</span></a></li>
+                        <li><a href="#quran" data-searchable="الأنعام الانعام">الأنعام <span>٦</span></a></li>
+                    </ul>
+                    <a class="all-surahs" href="#quran">عرض فهرس السور <span aria-hidden="true">←</span></a>
+                </section>
+
+                <section class="side-card explore-card" id="discover" aria-labelledby="discover-title">
+                    <p class="eyebrow">مسارات للمعرفة</p>
+                    <h2 id="discover-title">استكشف الموضوعات</h2>
+                    <div class="topic-list">
+                        <a href="#library" data-searchable="القرآن وعلومه"><span class="topic-symbol">آ</span> القرآن وعلومه <span>←</span></a>
+                        <a href="#library" data-searchable="الحديث الشريف النووي"><span class="topic-symbol">◈</span> الحديث الشريف <span>←</span></a>
+                        <a href="#library" data-searchable="السيرة النبوية"><span class="topic-symbol">✧</span> السيرة النبوية <span>←</span></a>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">ص</span> الصراط المستقيم</a>
+        <p>مساحة للقراءة والبحث في مصادر المعرفة الإسلامية.</p>
+    </footer>
+</body>
+</html>

@@ -4,9 +4,10 @@ from sqlalchemy.exc import IntegrityError
 import click
 from werkzeug.security import generate_password_hash, check_password_hash
 from src.main.routes import main
+from src.root.routes import root
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "temp"
-app.config["SQLALCHEMY_DATABASE_URI"]
 
 app.register_blueprint(main)
+app.register_blueprint(root)
