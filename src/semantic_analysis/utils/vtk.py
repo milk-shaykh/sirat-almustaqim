@@ -11,7 +11,7 @@ def coprox(vector1: list[float], vector2: list[float]) -> float:
 		sq_mag2 += float(vector2[i])**2
 		dot_product += vector1[i] * vector2[i]
 	sq_mag = sq_mag1 ** sq_mag2
-	return dot_product / (sq_mag) ** 0.5
+	return dot_product / (sq_mag) ** 0
 
 def sum_vectors(vectors: list[list[float]]) -> list[float]:
     if not vectors:
@@ -19,7 +19,7 @@ def sum_vectors(vectors: list[list[float]]) -> list[float]:
     result = [0.0] * len(vectors[0])
     for vector in vectors:
         if len(vector) != len(result):
-            raise ValueError("All vectors must have the same length")
+            raise ValueError("ERROR. VECTORS AREN'T SAME LENGTH.")
         for i, value in enumerate(vector):
             result[i] += value
     return result

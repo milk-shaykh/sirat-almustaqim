@@ -1,0 +1,103 @@
+:root {
+    color-scheme: light;
+    --global-background: #fbfaf7;
+    --global-surface: #fff;
+    --global-text: #26352f;
+    --global-muted: #65716a;
+    --global-border: #e9e8e1;
+    --global-control: #fff;
+    --global-focus: #8ab9a5;
+    --global-accent: #17664e;
+    --global-accent-strong: #10523e;
+    --global-accent-soft: #edf5f0;
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --global-background: #111915;
+    --global-surface: #1a241e;
+    --global-text: #e6ece8;
+    --global-muted: #a1ada6;
+    --global-border: #303d35;
+    --global-control: #202b24;
+    --global-focus: #82bd9f;
+    --global-accent: #79b99b;
+    --global-accent-strong: #a1cfb5;
+    --global-accent-soft: #203d32;
+}
+
+html {
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    background: var(--global-background);
+    color: var(--global-text);
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+button,
+input,
+textarea,
+select {
+    color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline-color: var(--global-focus);
+}
+
+.theme-toggle {
+    position: fixed;
+    z-index: 20;
+    inset-inline-end: 20px;
+    bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 14px;
+    border: 1px solid var(--global-border);
+    border-radius: 999px;
+    background: var(--global-surface);
+    box-shadow: 0 4px 16px rgb(25 42 32 / 16%);
+    color: var(--global-text);
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.theme-toggle:hover {
+    border-color: var(--global-focus);
+}
+
+.theme-toggle-icon {
+    color: var(--global-accent);
+    font-size: 18px;
+}
+
+@media (max-width: 650px) {
+    .theme-toggle {
+        inset-inline-end: 12px;
+        bottom: 12px;
+        min-height: 40px;
+        padding: 7px 11px;
+        font-size: 13px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

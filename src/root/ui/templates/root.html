@@ -1,16 +1,15 @@
-<!doctype html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "global.html" %}
+{% block html_lang %}ar{% endblock %}
+{% block html_dir %}rtl{% endblock %}
+{% block title %}الصراط المستقيم | القرآن والمكتبة الإسلامية{% endblock %}
+{% block head %}
     <meta name="theme-color" content="#fbfaf7">
-    <title>الصراط المستقيم | القرآن والمكتبة الإسلامية</title>
     <link rel="stylesheet" href="{{ url_for('root.static', filename='root.css') }}">
     <script src="{{ url_for('root.static', filename='root.js') }}" defer></script>
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <header class="site-header">
-        <a class="brand" href="#top" aria-label="الصراط المستقيم - الصفحة الرئيسية">
+        <a class="brand" href="{{ url_for('login_signup.login') }}" aria-label="الصراط المستقيم - الصفحة الرئيسية">
             <span class="brand-mark" aria-hidden="true">ص</span>
             <span class="brand-name">الصراط المستقيم</span>
         </a>
@@ -19,32 +18,35 @@
             <a class="nav-link" href="#library">المكتبة</a>
             <a class="nav-link" href="#discover">استكشف</a>
         </nav>
-        <a class="account-link" href="#quran">ابدأ القراءة</a>
+        <a class="account-link" href="{{ url_for('login_signup.login') }}">ابدأ القراءة</a>
     </header>
 
     <main id="top">
         <section class="welcome" aria-labelledby="welcome-title">
-            <div class="welcome-copy">
-                <p class="eyebrow">اقرأ، وابحث، وتدبّر</p>
-                <h1 id="welcome-title">رفيقك إلى <span>المعرفة الإسلامية</span></h1>
-                <p class="welcome-subtitle">القرآن الكريم ومكتبة من أمهات الكتب، في مكان واحد.</p>
-            </div>
-            <form class="search-form" id="site-search" role="search">
-                <label class="visually-hidden" for="search-input">ابحث في القرآن والمكتبة</label>
-                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="10.8" cy="10.8" r="6.8"></circle>
-                    <path d="m16 16 4.5 4.5"></path>
-                </svg>
-                <input id="search-input" type="search" autocomplete="off"
-                       placeholder="ابحث في القرآن الكريم والكتب..." aria-controls="search-results">
-                <button type="submit">بحث</button>
-                <div class="search-results" id="search-results" role="status" aria-live="polite" hidden></div>
-            </form>
-            <div class="search-hints" aria-label="أمثلة للبحث">
-                <span>جرّب:</span>
-                <button type="button" class="search-suggestion" data-query="الفاتحة">سورة الفاتحة</button>
-                <button type="button" class="search-suggestion" data-query="الصبر">الصبر</button>
-                <button type="button" class="search-suggestion" data-query="تفسير">التفسير</button>
+            <div class="welcome-ornament" aria-hidden="true">۞</div>
+            <div class="welcome-content">
+                <div class="welcome-copy">
+                    <p class="eyebrow">اقرأ، وابحث، وتدبّر</p>
+                    <h1 id="welcome-title">رفيقك إلى <span>المعرفة الإسلامية</span></h1>
+                    <p class="welcome-subtitle">القرآن الكريم ومكتبة من أمهات الكتب، في مكان واحد.</p>
+                </div>
+                <form class="search-form" id="site-search" role="search">
+                    <label class="visually-hidden" for="search-input">ابحث في القرآن والمكتبة</label>
+                    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="10.8" cy="10.8" r="6.8"></circle>
+                        <path d="m16 16 4.5 4.5"></path>
+                    </svg>
+                    <input id="search-input" type="search" autocomplete="off"
+                        placeholder="ابحث في القرآن الكريم والكتب..." aria-controls="search-results">
+                    <button type="submit">بحث</button>
+                    <div class="search-results" id="search-results" role="status" aria-live="polite" hidden></div>
+                </form>
+                <div class="search-hints" aria-label="أمثلة للبحث">
+                    <span>جرّب:</span>
+                    <button type="button" class="search-suggestion" data-query="الفاتحة">سورة الفاتحة</button>
+                    <button type="button" class="search-suggestion" data-query="الصبر">الصبر</button>
+                    <button type="button" class="search-suggestion" data-query="تفسير">التفسير</button>
+                </div>
             </div>
         </section>
 
@@ -68,15 +70,15 @@
                     </a>
                     <div class="verse-panel">
                         <div class="verse-meta">
-                            <span>سورة طه <span dir="ltr">20:25–26</span></span>
+                            <span dir="rtl">سورة طه <span dir="ltr">20:25–26</span></span>
                             <div class="reader-controls" aria-label="أدوات القراءة">
                                 <button type="button" id="decrease-text" aria-label="تصغير حجم النص">−</button>
                                 <button type="button" id="increase-text" aria-label="تكبير حجم النص">+</button>
                             </div>
                         </div>
-                        <p class="verse-text" id="verse-text">رَبِّ اشْرَحْ لِي صَدْرِي ۝ وَيَسِّرْ لِي أَمْرِي</p>
+                        <p class="verse-text" id="verse-text" dir="rtl">رَبِّ اشْرَحْ لِي صَدْرِي ۝ وَيَسِّرْ لِي أَمْرِي</p>
                         <div class="verse-footer">
-                            <span>دعاء موسى عليه السلام</span>
+                            <span dir="rtl">دعاء موسى عليه السلام</span>
                             <button class="save-verse" id="save-verse" type="button" aria-pressed="false">
                                 <span aria-hidden="true">♡</span> <span class="save-label">حفظ الآية</span>
                             </button>
@@ -164,5 +166,4 @@
         <a class="brand footer-brand" href="#top"><span class="brand-mark" aria-hidden="true">ص</span> الصراط المستقيم</a>
         <p>مساحة للقراءة والبحث في مصادر المعرفة الإسلامية.</p>
     </footer>
-</body>
-</html>
+{% endblock %}
