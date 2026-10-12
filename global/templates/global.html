@@ -1,12 +1,21 @@
 <!DOCTYPE HTML>
 
-<html>
+<html lang="{% block html_lang %}en{% endblock %}" dir="{% block html_dir %}ltr{% endblock %}">
 
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="{{ url_for('static', filename='global.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='global.css') }}">
         <title>{% block title %}Users{% endblock %}</title>
+        {% block head %}{% endblock %}
     </head>
 
     <body>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+            <span class="theme-toggle-icon" aria-hidden="true">☾</span>
+            <span class="theme-toggle-label">Dark mode</span>
+        </button>
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <ul class="flashes">

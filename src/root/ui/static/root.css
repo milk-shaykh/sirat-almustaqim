@@ -1,15 +1,16 @@
 :root {
     color-scheme: light;
-    --ink: #26352f;
-    --muted: #77817b;
-    --green: #17664e;
-    --green-dark: #10523e;
-    --green-pale: #edf5f0;
-    --paper: #fbfaf7;
-    --white: #fff;
-    --line: #e9e8e1;
+    --ink: var(--global-text, #26352f);
+    --muted: var(--global-muted, #77817b);
+    --green: var(--global-accent, #17664e);
+    --green-dark: var(--global-accent-strong, #10523e);
+    --green-pale: var(--global-accent-soft, #edf5f0);
+    --paper: var(--global-background, #fbfaf7);
+    --white: var(--global-surface, #fff);
+    --line: var(--global-border, #e9e8e1);
     --gold: #c59b58;
-    font-family: "Noto Naskh Arabic", "Amiri", "Geeza Pro", "Traditional Arabic", serif;
+    --body-font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    --arabic-font: "Noto Naskh Arabic", "Amiri", "Geeza Pro", "Traditional Arabic", serif;
     font-synthesis: none;
     text-rendering: optimizeLegibility;
 }
@@ -26,6 +27,7 @@ body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
+    font-family: var(--body-font);
     font-size: 16px;
     line-height: 1.65;
 }
@@ -54,6 +56,9 @@ input:focus-visible {
 }
 
 .site-header {
+    position: sticky;
+    z-index: 5;
+    top: 0;
     height: 76px;
     padding: 0 max(5vw, calc((100vw - 1180px) / 2));
     display: flex;
@@ -134,8 +139,23 @@ main {
 }
 
 .welcome {
-    padding: 57px 0 39px;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    margin: 27px 0 25px;
+    padding: 46px 24px 33px;
+    border: 1px solid #2c765d;
+    border-radius: 16px;
+    background:
+        linear-gradient(rgb(10 35 28 / 46%), rgb(10 35 28 / 46%)),
+        url("/assets/images/background.jpg") center / cover no-repeat;
+    box-shadow: 0 14px 36px rgb(29 72 53 / 12%);
     text-align: center;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 1;
 }
 
 .eyebrow {
@@ -148,34 +168,38 @@ main {
 
 .welcome h1 {
     margin: 0;
-    color: #293b32;
+    color: #fffdf8;
     font-size: clamp(28px, 4vw, 40px);
     font-weight: 600;
     line-height: 1.45;
 }
 
 .welcome h1 span {
-    color: var(--green);
+    color: #e4c98e;
 }
 
 .welcome-subtitle {
-    margin: 5px 0 23px;
-    color: var(--muted);
+    margin: 7px 0 24px;
+    color: rgb(255 255 255 / 78%);
     font-size: 16px;
+}
+
+.welcome .eyebrow {
+    color: #c9dfcf;
 }
 
 .search-form {
     position: relative;
     display: flex;
     align-items: center;
-    width: min(650px, 100%);
+    width: min(680px, 100%);
     height: 58px;
     margin: 0 auto;
     padding: 5px 7px 5px 15px;
-    border: 1px solid #e4e5dd;
+    border: 1px solid rgb(255 255 255 / 70%);
     border-radius: 9px;
     background: var(--white);
-    box-shadow: 0 5px 20px rgb(43 55 47 / 5%);
+    box-shadow: 0 8px 24px rgb(8 42 30 / 19%);
 }
 
 .search-form:focus-within {
@@ -244,24 +268,25 @@ main {
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 11px;
-    color: #929a94;
+    margin-top: 13px;
+    color: rgb(255 255 255 / 68%);
     font-size: 13px;
 }
 
 .search-suggestion {
     padding: 2px 9px;
-    border: 1px solid #e8e9e3;
+    border: 1px solid rgb(255 255 255 / 25%);
     border-radius: 20px;
-    background: transparent;
-    color: #65716a;
+    background: rgb(255 255 255 / 7%);
+    color: #f8f6ef;
     cursor: pointer;
     font-size: 12px;
 }
 
 .search-suggestion:hover {
-    border-color: #c4d9cb;
-    color: var(--green);
+    border-color: #e4c98e;
+    background: rgb(255 255 255 / 12%);
+    color: #fff;
 }
 
 .page-layout {
@@ -410,6 +435,7 @@ main {
 .verse-text {
     margin: 13px 0 12px;
     color: #34483c;
+    font-family: var(--arabic-font);
     font-size: 28px;
     line-height: 2;
     text-align: center;
@@ -748,7 +774,9 @@ main {
     }
 
     .welcome {
-        padding: 36px 0 26px;
+        margin: 18px 0 18px;
+        padding: 34px 16px 24px;
+        border-radius: 12px;
     }
 
     .welcome h1 {
@@ -756,7 +784,14 @@ main {
     }
 
     .welcome-subtitle {
+        margin-bottom: 19px;
         font-size: 14px;
+    }
+
+    .welcome-ornament {
+        top: 1px;
+        inset-inline-start: -12px;
+        font-size: 110px;
     }
 
     .search-form {
@@ -827,4 +862,55 @@ main {
     .side-column {
         grid-template-columns: 1fr;
     }
+}
+
+html[data-theme="dark"] .resume-row,
+html[data-theme="dark"] .book-card,
+html[data-theme="dark"] .surah-filter,
+html[data-theme="dark"] .reader-controls button {
+    border-color: var(--global-border);
+    background: var(--global-control);
+    color: var(--global-text);
+}
+
+html[data-theme="dark"] .verse-panel {
+    background: #202920;
+}
+
+html[data-theme="dark"] .verse-text {
+    color: #e2e9e3;
+}
+
+html[data-theme="dark"] .verse-footer,
+html[data-theme="dark"] .surah-list li + li,
+html[data-theme="dark"] .all-surahs,
+html[data-theme="dark"] .topic-list a {
+    border-color: var(--global-border);
+}
+
+html[data-theme="dark"] .search-results {
+    border-color: var(--global-border);
+    background: var(--global-surface);
+    color: var(--global-muted);
+}
+
+html[data-theme="dark"] .search-icon {
+    stroke: var(--global-muted);
+}
+
+html[data-theme="dark"] .surah-list a,
+html[data-theme="dark"] .topic-list a,
+html[data-theme="dark"] .save-verse {
+    color: var(--global-text);
+}
+
+html[data-theme="dark"] .topic-symbol {
+    background: #26372d;
+    color: #a1cfb5;
+}
+
+html[data-theme="dark"] .resume-row:hover,
+html[data-theme="dark"] .book-card:hover {
+    border-color: #4c735e;
+    background: #23332a;
 }
