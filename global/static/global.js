@@ -3,6 +3,10 @@
     const root = document.documentElement;
     const validThemes = new Set(["light", "dark"]);
 
+    function updateDirection() {
+        root.dir = root.lang.toLowerCase().startsWith("ar") ? "rtl" : "ltr";
+    }
+
     function getInitialTheme() {
         try {
             const savedTheme = window.localStorage.getItem(themeKey);
@@ -39,9 +43,23 @@
         updateToggle(theme);
     }
 
+    updateDirection();
     applyTheme(getInitialTheme());
 
     document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('input:not([dir]), textarea:not([dir]), [contenteditable="true"]:not([dir])')
+            .forEach((field) => {
+                field.dir = "auto";
+            });
+
+        const flashes = document.querySelector(".flashes");
+        if (flashes) {
+            window.setTimeout(() => {
+                flashes.classList.add("is-dismissing");
+                window.setTimeout(() => flashes.remove(), 400);
+            }, 4600);
+        }
+
         const toggle = document.querySelector("[data-theme-toggle]");
         if (!toggle) {
             return;

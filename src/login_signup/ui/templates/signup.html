@@ -1,49 +1,46 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#fbfaf7">
-        <title>إنشاء حساب</title>
-        <link rel="stylesheet" href="{{ url_for('login_signup.static', filename='login_signup.css') }}">
-    </head>
-    <body>
-        <div class="auth-page">
-            <div class="auth-shell">
-                <div class="auth-copy">
-                    <p class="eyebrow">اقرأ، وابحث، وتدبّر</p>
-                    <h1>انضم إلى رحلتك</h1>
-                    <p>أنشئ حسابك الآن وابدأ في استكشاف القرآن والمكتبة الإسلامية.</p>
-                </div>
+{% extends "global.html" %}
+{% block title %}Sign up{% endblock %}
+{% block head %}
+    <meta name="theme-color" content="#fbfaf7">
+    <link rel="stylesheet" href="{{ url_for('login_signup.static', filename='login_signup.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="auth-page">
+        <div class="auth-shell">
+            <div class="auth-copy">
+                <p class="eyebrow">Read. Research. Reflect.</p>
+                {% from "components/electric_logo.html" import electric_logo %}
+                {{ electric_logo(url_for('root.assets', filename='images/logo.png'), height='280px', scale=0.6, crackle=2, strands=1) }}
+                <p>The Qur'an and Ahadith. In one place.</p>
+            </div>
 
-                <div class="auth-panel">
-                    <div class="auth-card">
-                        <p class="card-kicker">ابدأ الآن</p>
-                        <h2>إنشاء حساب</h2>
+            <div class="auth-panel">
+                <div class="auth-card">
+                    <p class="card-kicker">Welcome.</p>
+                    <h2>Sign up.</h2>
 
-                        <form class="auth-form" method="post">
-                            <div class="auth-field">
-                                <label for="username">اسم المستخدم</label>
-                                <input id="username" name="username" type="text" required>
-                            </div>
+                    <form class="auth-form" method="post">
+                        <div class="auth-field">
+                            <label for="username">Username</label>
+                            <input id="username" name="username" type="text" required>
+                        </div>
 
-                            <div class="auth-field">
-                                <label for="email">البريد الإلكتروني</label>
-                                <input id="email" name="email" type="email" required>
-                            </div>
+                        <div class="auth-field">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" required>
+                        </div>
 
-                            <div class="auth-field">
-                                <label for="password">كلمة المرور</label>
-                                <input id="password" name="password" type="password" required>
-                            </div>
+                        <div class="auth-field">
+                            <label for="password">Password</label>
+                            <input id="password" name="password" type="password" required>
+                        </div>
 
-                            <button class="auth-submit" type="submit">إنشاء الحساب</button>
-                        </form>
+                        <button class="auth-submit" type="submit">Submit</button>
+                    </form>
 
-                        <p class="auth-switch">لديك حساب بالفعل؟ <a href="{{ url_for('login_signup.login') }}">تسجيل الدخول</a></p>
-                    </div>
+                    <p class="auth-switch">Have an account? <a href="{{ url_for('login_signup.login') }}">Login.</a></p>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+{% endblock %}
