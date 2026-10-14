@@ -1,0 +1,14 @@
+{% from "components/electric_logo.html" import electric_logo %}
+
+{{ electric_logo(url_for('root.assets', filename='images/logo.png')) }}
+
+
+
+
+{{ electric_logo(
+    url_for('root.assets', filename='images/logo.png'),
+    height='320px',
+    color='#9DC48E',
+    glow_color='#9DC48E',
+    scale=0.4
+) }}

@@ -1,7 +1,7 @@
 {% extends "global.html" %}
-{% block html_lang %}ar{% endblock %}
-{% block html_dir %}rtl{% endblock %}
-{% block title %}الصراط المستقيم | القرآن والمكتبة الإسلامية{% endblock %}
+{% block html_lang %}eng{% endblock %}
+{% block html_dir %}auto{% endblock %}
+{% block title %}الصراط المستقيم{% endblock %}
 {% block head %}
     <meta name="theme-color" content="#fbfaf7">
     <link rel="stylesheet" href="{{ url_for('root.static', filename='root.css') }}">
@@ -15,10 +15,10 @@
         </a>
         <nav class="primary-nav" aria-label="التنقل الرئيسي">
             <a class="nav-link is-active" href="#quran">القرآن الكريم</a>
-            <a class="nav-link" href="#library">المكتبة</a>
-            <a class="nav-link" href="#discover">استكشف</a>
+            <a class="nav-link" href="#library">Library</a>
+            <a class="nav-link" href="#discover">Discover</a>
         </nav>
-        <a class="account-link" href="{{ url_for('login_signup.login') }}">ابدأ القراءة</a>
+        <a class="account-link" href="{{ url_for('login_signup.signup') }}">Create an account</a>
     </header>
 
     <main id="top">
@@ -26,23 +26,22 @@
             <div class="welcome-ornament" aria-hidden="true">۞</div>
             <div class="welcome-content">
                 <div class="welcome-copy">
-                    <p class="eyebrow">اقرأ، وابحث، وتدبّر</p>
-                    <h1 id="welcome-title">رفيقك إلى <span>المعرفة الإسلامية</span></h1>
-                    <p class="welcome-subtitle">القرآن الكريم ومكتبة من أمهات الكتب، في مكان واحد.</p>
+                    <p class="eyebrow">Read. Research. Reflect.</p>
+                    <h1 id="welcome-title">Your companion to <span>Islamic Knowledge</span></h1>
+                    <p class="welcome-subtitle">The Qur'an and Ahadith. In one place.</p>
                 </div>
                 <form class="search-form" id="site-search" role="search">
-                    <label class="visually-hidden" for="search-input">ابحث في القرآن والمكتبة</label>
+                    <label class="visually-hidden" for="search-input">Search for Qur'an and Ahadith</label>
                     <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
                         <circle cx="10.8" cy="10.8" r="6.8"></circle>
                         <path d="m16 16 4.5 4.5"></path>
                     </svg>
                     <input id="search-input" type="search" autocomplete="off"
-                        placeholder="ابحث في القرآن الكريم والكتب..." aria-controls="search-results">
+                        placeholder="Search for Qur'an and Ahadith..." aria-controls="search-results">
                     <button type="submit">بحث</button>
                     <div class="search-results" id="search-results" role="status" aria-live="polite" hidden></div>
                 </form>
-                <div class="search-hints" aria-label="أمثلة للبحث">
-                    <span>جرّب:</span>
+                <div class="search-hints" aria-label="Reccomended">
                     <button type="button" class="search-suggestion" data-query="الفاتحة">سورة الفاتحة</button>
                     <button type="button" class="search-suggestion" data-query="الصبر">الصبر</button>
                     <button type="button" class="search-suggestion" data-query="تفسير">التفسير</button>
@@ -56,9 +55,9 @@
                     <div class="section-heading">
                         <div>
                             <p class="eyebrow">القرآن الكريم</p>
-                            <h2 id="reading-title">تابع القراءة</h2>
+                            <h2 id="reading-title">Continue Reading:</h2>
                         </div>
-                        <a class="text-link" href="#surah-list">كل السور <span aria-hidden="true">←</span></a>
+                        <a class="text-link" href="#surah-list">All Sur<span aria-hidden="true">←</span></a>
                     </div>
                     <a class="resume-row" href="#surah-list">
                         <span class="surah-emblem" aria-hidden="true">۞</span>

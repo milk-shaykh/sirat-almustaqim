@@ -40,7 +40,6 @@ def reset_db():
     db.create_all()
     click.echo("database reset")
 
-
 @app.route('/register', methods=["GET", "POST"])
 def register():
     if request.method == "POST":

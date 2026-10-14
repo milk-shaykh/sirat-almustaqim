@@ -1,0 +1,13 @@
+.electric-logo-mount {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    overflow: hidden;
+}
+
+.electric-logo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}

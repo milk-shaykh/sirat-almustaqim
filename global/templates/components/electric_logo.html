@@ -1,0 +1,26 @@
+{% macro electric_logo(src, height='480px', color='#9DC48E', glow_color='#9DC48E', scale=0.4, strands=4, bend=0.4, crackle=0, arcs=0.5, speed=2, interactive=true, intensity=1, glow=2, thickness=1, flicker=0.7, fill=1, cursor_intensity=0.5, cursor_radius=40, theme='dark', class_name='') -%}
+<div
+    class="electric-logo-mount {{ class_name }}"
+    data-electric-logo
+    data-height="{{ height }}"
+    data-src="{{ src }}"
+    data-color="{{ color }}"
+    data-glow-color="{{ glow_color }}"
+    data-scale="{{ scale }}"
+    data-strands="{{ strands }}"
+    data-bend="{{ bend }}"
+    data-crackle="{{ crackle }}"
+    data-arcs="{{ arcs }}"
+    data-speed="{{ speed }}"
+    data-interactive="{{ 'true' if interactive else 'false' }}"
+    data-intensity="{{ intensity }}"
+    data-glow="{{ glow }}"
+    data-thickness="{{ thickness }}"
+    data-flicker="{{ flicker }}"
+    data-fill="{{ fill }}"
+    data-cursor-intensity="{{ cursor_intensity }}"
+    data-cursor-radius="{{ cursor_radius }}"
+    data-theme="{{ theme }}"
+></div>
+<script type="module" src="{{ url_for('static', filename='electric_logo.js') }}"></script>
+{%- endmacro %}
