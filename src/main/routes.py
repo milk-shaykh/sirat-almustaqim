@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session, redirect, url_for
+from db.database import db, User
 
 main = Blueprint("main",
     __name__,
@@ -9,4 +10,14 @@ main = Blueprint("main",
 
 @main.route("/profile")
 def profile():
-	return render_template('profile.html')
+    user_id = session.get("user_id") # is like session["user_id"]
+    if user_id is None:
+        return redirect(url_for("login"))
+
+    user = db.session.get(User, user_id) # quick way to get database entry
+    return render_template("profile.html", user=user)
+
+@main.route('/signout')
+def signout():
+    session.clear()
+    return redirect(url_for("root.home"))
