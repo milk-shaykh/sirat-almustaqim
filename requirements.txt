@@ -1,1 +1,6 @@
-Flask SQLAlchemy 
+flask 
+flask_sqlalchemy
+werkzeug
+click
+requests
+python-dotenv
