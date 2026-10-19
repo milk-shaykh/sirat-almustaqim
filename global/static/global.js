@@ -40,6 +40,10 @@
 
     function applyTheme(theme) {
         root.dataset.theme = theme;
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+        if (themeColor) {
+            themeColor.content = themeColor.dataset[`themeColor${theme === "dark" ? "Dark" : "Light"}`];
+        }
         updateToggle(theme);
     }
 
@@ -51,6 +55,27 @@
             .forEach((field) => {
                 field.dir = "auto";
             });
+
+        document.querySelectorAll("[data-password-toggle]").forEach((toggle) => {
+            const input = document.getElementById(toggle.getAttribute("aria-controls"));
+            if (!(input instanceof HTMLInputElement)) {
+                console.error("Password visibility control is missing its input.", toggle);
+                return;
+            }
+
+            const eyes = toggle.querySelectorAll("[data-password-eye]");
+            const slash = toggle.querySelector("[data-password-eye-slash]");
+            toggle.addEventListener("click", () => {
+                const isVisible = input.type === "password";
+                input.type = isVisible ? "text" : "password";
+                toggle.setAttribute("aria-pressed", String(isVisible));
+                toggle.setAttribute("aria-label", isVisible ? "Hide password" : "Show password");
+                eyes.forEach((eye) => {
+                    eye.hidden = isVisible;
+                });
+                if (slash) slash.hidden = !isVisible;
+            });
+        });
 
         const flashes = document.querySelector(".flashes");
         if (flashes) {

@@ -780,7 +780,7 @@ hover.vy += ((pointer.y - hover.y) * 120 - hover.vy * 19) * dt;
 hover.x += hover.vx * dt;
 hover.y += hover.vy * dt;
 hover.power += ((engaged ? 1 : 0) - hover.power) * (1 - Math.exp(-dt / (engaged ? 0.3 : 0.55)));
-const motion = reducedMotion ? 0.2 : 1;
+const motion = reducedMotion ? 0.5 : 1;
 time += dt * s.speed * motion;
 for (let i = sparks.length - 1; i >= 0; i--) {
 if (time - sparks[i].born > sparks[i].life) sparks.splice(i, 1);
@@ -797,8 +797,8 @@ if (spark) sparks.push(spark);
 }
 }
 burst = null;
-if (!reducedMotion && presence > 0.8 && morph >= 1 && sparks.length < ARCS) {
-const chance = dt * s.speed * s.arcs;
+if (presence > 0.8 && morph >= 1 && sparks.length < ARCS) {
+const chance = dt * s.speed * s.arcs * (reducedMotion ? 0.15 : 1);
 if (Math.random() < chance * 6 * hover.power * s.cursorIntensity) {
 const spark = spawnArc(to, time, focus(hover));
 if (spark) sparks.push(spark);
@@ -898,7 +898,7 @@ pointer.over = true;
 };
 const onDown = e => {
 onMove(e);
-if (!settingsRef.current?.interactive || reducedMotion) return;
+if (!settingsRef.current?.interactive) return;
 pulses.push({ x: pointer.x, y: pointer.y, born: performance.now() });
 if (pulses.length > PULSES) pulses.shift();
 burst = { x: pointer.x, y: pointer.y };
@@ -935,4 +935,3 @@ if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
 return <div ref={containerRef} className={`electric-logo ${className}`.trim()} style={style} />;
 };
 export default ElectricLogo;
-

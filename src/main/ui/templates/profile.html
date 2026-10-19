@@ -3,23 +3,69 @@
 {% block html_dir %}auto{% endblock %}
 {% block title %}الصراط المستقيم{% endblock %}
 {% block head %}
-    <meta name="theme-color" content="#fbfaf7">
     <link rel="stylesheet" href="{{ url_for('root.static', filename='root.css') }}">
     <script src="{{ url_for('root.static', filename='root.js') }}" defer></script>
 {% endblock %}
 {% block content %}
     <header class="site-header">
-        <a class="brand" href="{{ url_for('login_signup.login') }}" aria-label="الصراط المستقيم - الصفحة الرئيسية">
-            <span class="brand-mark" aria-hidden="true">ص</span>
-            <span class="brand-name">{{  }}</span>
-        </a>
+        <button class="brand dashboard-toggle" id="dashboard-toggle" type="button"
+            aria-label="Open dashboard" aria-controls="dashboard-panel" aria-expanded="false">
+            <span class="dashboard-menu-icon" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+            <span class="brand-name">  Hello, {{ user.username }}!</span>
+        </button>
         <nav class="primary-nav" aria-label="التنقل الرئيسي">
             <a class="nav-link is-active" href="#quran">القرآن الكريم</a>
             <a class="nav-link" href="#library">Library</a>
             <a class="nav-link" href="#discover">Discover</a>
         </nav>
-        <a class="account-link" href="{{ url_for('login_signup.signup') }}">Create an account</a>
     </header>
+
+    <div class="dashboard-backdrop" id="dashboard-backdrop" aria-hidden="true"></div>
+    <aside class="dashboard-panel" id="dashboard-panel" aria-labelledby="dashboard-title"
+        aria-hidden="true" inert>
+        <div class="dashboard-heading">
+            <div>
+                <p class="eyebrow">Your space</p>
+                <h2 id="dashboard-title">Dashboard</h2>
+            </div>
+            <button class="dashboard-close" id="dashboard-close" type="button" aria-label="Close dashboard">×</button>
+        </div>
+        <p class="dashboard-greeting">Welcome, <strong>{{ user.username }}</strong></p>
+        <nav class="dashboard-links" aria-label="Dashboard shortcuts">
+            <a href="#quran" data-dashboard-item="quran"><span aria-hidden="true">۞</span> Continue reading <span aria-hidden="true">←</span></a>
+            <a href="#library" data-dashboard-item="library"><span aria-hidden="true">▤</span> Browse the library <span aria-hidden="true">←</span></a>
+            <a href="#surah-list" data-dashboard-item="surahs"><span aria-hidden="true">☷</span> Qur'an surahs <span aria-hidden="true">←</span></a>
+            <a href="#discover" data-dashboard-item="topics"><span aria-hidden="true">✧</span> Explore topics <span aria-hidden="true">←</span></a>
+            <a href="{{ url_for('main.signout') }}" data-dashboard-item="signout"
+                aria-label="Hold to sign out" aria-describedby="signout-hint">
+                <span aria-hidden="true">⎋</span>
+                <span class="dashboard-signout-label">
+                    <span data-signout-idle>Hold to sign out</span>
+                    <span data-signout-done hidden>Signing out…</span>
+                </span>
+                <span aria-hidden="true">←</span>
+            </a>
+            <span class="visually-hidden" id="signout-hint">Press and hold for one second to sign out.</span>
+            <p class="dashboard-empty" id="dashboard-empty" hidden>No shortcuts selected. Customize your dashboard to add some.</p>
+        </nav>
+        <section class="dashboard-customizer" aria-labelledby="dashboard-customize-title">
+            <button class="dashboard-customize-toggle" id="dashboard-customize-toggle" type="button"
+                aria-expanded="false" aria-controls="dashboard-customize-options">
+                Customize shortcuts <span aria-hidden="true">⌄</span>
+            </button>
+            <div class="dashboard-customize-options" id="dashboard-customize-options" hidden>
+                <p id="dashboard-customize-title">Choose what appears on your dashboard.</p>
+                <label><input type="checkbox" data-dashboard-setting="quran" checked> Continue reading</label>
+                <label><input type="checkbox" data-dashboard-setting="library" checked> Browse the library</label>
+                <label><input type="checkbox" data-dashboard-setting="surahs" checked> Qur'an surahs</label>
+                <label><input type="checkbox" data-dashboard-setting="topics" checked> Explore topics</label>
+            </div>
+        </section>
+    </aside>
 
     <main id="top">
         <section class="welcome" aria-labelledby="welcome-title">
