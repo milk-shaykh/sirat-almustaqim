@@ -1,12 +1,32 @@
-def swap(tuples: list[tuple[float, int]], i, j):
-	tuples[i], tuples[j] = tuples[j], tuples[i]
+def quicksort_proxtuples(items, start, end): #ind 0 == prox ind 1 == index
+    if start >= end:
+        return
+    else:
+        pivot_value = items[start]
+        low = start + 1
+        high = end
+        finished = False
 
-def partition(tuples: list[tuple[float, int]], start: int, end: int):
-	pivot = tuples[end][0]
-	i = start - 1
-	for j in range(start, end):
-		if tuples[j][0] < pivot:
-			i += 1
-			swap(tuples, i, j)
+        while not finished:
+            while low <= high and items[low][0] <= pivot_value[0]:
+                low += 1
 
-	swap()
+            while low <= high and items[high][0] >= pivot_value[0]:
+                high -= 1
+
+            if low < high:
+                temp = items[low]
+                items[low] = items[high]
+                items[high] = temp
+
+            else:
+                finished = True
+
+        temp = items[start]
+        items[start] = items[high]
+        items[high] = temp
+
+        quicksort_proxtuples(items, start, high-1)
+        quicksort_proxtuples(items, high+1, end)
+
+    return items
